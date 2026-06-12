@@ -11,13 +11,14 @@ const envSchema = z.object({
       message: "PORT must be a positive number",
     })
     .default("4000"),
-  DATABASE_URL: z.string().url({
-    message: "DATABASE_URL must be a valid connection URL string",
+  DATABASE_URL: z.string().min(1, {
+    message: "DATABASE_URL is required",
   }),
   JWT_SECRET: z.string().min(8, {
     message: "JWT_SECRET must be at least 8 characters long",
   }),
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
+  FRONTEND_URL: z.string().optional(),
 });
 
 const parseEnv = () => {
